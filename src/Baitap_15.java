@@ -2,35 +2,33 @@ import java.util.Scanner;
 
 public class Baitap_15 {
     public static void main(String[] args) {
+        //Bước 1: Nhập số phần tử, khai báo mảng, nhập giá trị các phần tử
         Scanner scanner = new Scanner(System.in);
-        // Khai báo và nhập giá trị cho mảng số nguyên bất kỳ
-        System.out.print("Nhập số lượng phần tử trong mảng : ");
-        int n = Integer.parseInt(scanner.nextLine());
-        int[] arr = new int[n];
-
-        System.out.println("Nhập " + n + " số nguyên: ");
-        for (int i = 0; i < arr.length; i++) {
-            arr[i] = scanner.nextInt();
+        System.out.println("Nhập số phần tử của mảng:");
+        int size = Integer.parseInt(scanner.nextLine());
+        int[] arrInt = new int[size];
+        System.out.println("Nhập giá trị các phần tử:");
+        for (int i = 0; i < arrInt.length; i++) {
+            System.out.printf("arrInt[%d]=", i);
+            arrInt[i] = Integer.parseInt(scanner.nextLine());
         }
-
-        // Bước 2: Tìm số lớn thứ 2 trong mảng
-        int max1 = Integer.MIN_VALUE; // Lưu phần tử lớn nhất
-        int max2 = Integer.MIN_VALUE; // Lưu phần tử lớn thứ 2
-
-        for (int i = 0; i < arr.length; i++) {
-            if (arr[i] > max1) {
-                max2 = max1; // Gán max2 bằng giá trị của max1 trước khi gán max1 bằng phần tử mới
-                max1 = arr[i]; // Gán max1 bằng phần tử mới
-            } else if (arr[i] > max2 && arr[i] < max1) {
-                max2 = arr[i]; // Gán max2 bằng phần tử mới nếu nó lớn hơn max2 và nhỏ hơn max1
+        //Bước 2: Khai báo biến max = arrInt[0] và max2 = arrInt[0]
+        int max = arrInt[0];
+        int max2 = arrInt[0];
+        //Bước 3: Duyệt mảng và tìm phần tử có giá trị lớn thứ 2
+        //3.1. Duyệt mảng từ chỉ số i: 1 --> length-1
+        for (int element : arrInt) {
+            //3.2. Nếu max < arrInt[i] thì max = arrInt[i], max2 = max
+            if (max < element) {
+                max2 = max;
+                max = element;
+            } else {
+                //3.3. Nếu max>=arrInt[i] thì kiểm tra tiếp max2<arrInt[i] --> max2=arrInt[i]
+                if (max2 < element) {
+                    max2 = element;
+                }
             }
         }
-
-        // Kiểm tra nếu không tìm thấy phần tử lớn thứ 2
-        if (max2 == Integer.MIN_VALUE) {
-            System.out.println("Không tìm thấy phần tử lớn thứ hai trong mảng.");
-        } else {
-            System.out.println("Phần tử lớn thứ 2 trong mảng là: " + max2);
-        }
+        System.out.println("Giá trị phần tử lớn thứ 2 trong mảng là: " + max2);
     }
 }
